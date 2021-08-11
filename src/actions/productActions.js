@@ -1,30 +1,19 @@
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY} from './action-types/cartActions';
-
+import { PRODUCT_FETCHING,PRODUCT_FETCH_SUCCESS,PRODUCT_FETCH_FAILURE} from './action-types/actionConstants';
+import {productList} from '../helperFunctions/productHelpers';
+import axios from 'axios';
 //add cart action
-export const addToCart= (id)=>{
-    return{
-        type: ADD_TO_CART,
-        id
+const productsFetch = ()=>{
+
+    return (dispatch) => {
+        dispatch({type: PRODUCT_FETCHING});
+        productList().then((res)=> {
+             dispatch({type:PRODUCT_FETCH_SUCCESS,payload:res});
+        }).catch((e)=>{
+            console.log(e);
+           dispatch({type:PRODUCT_FETCH_FAILURE,payload:e});
+        });
     }
 }
-//remove item action
-export const removeItem=(id)=>{
-    return{
-        type: REMOVE_ITEM,
-        id
-    }
-}
-//subtract qt action
-export const subtractQuantity=(id)=>{
-    return{
-        type: SUB_QUANTITY,
-        id
-    }
-}
-//add qt action
-export const addQuantity=(id)=>{
-    return{
-        type: ADD_QUANTITY,
-        id
-    }
-}
+
+
+export {productsFetch};
