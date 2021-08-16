@@ -16,23 +16,19 @@ export const AppContext = React.createContext(contextValue);
 
 class App extends Component {
   render() {
-    return (
-        <BrowserRouter>
+    return (<BrowserRouter>
            <AppContext.Provider value={{vane:"hello"}}>
               <div className="App"> 
                 <Navbar/>
                 <Switch>  
                     <Route exact path="/" component={Home}/>
+                    <Route path="/test" component={Test}/>
                     <UserAccount path="/account/"/>
                   
                 </Switch>
               </div>
               </AppContext.Provider>
-       </BrowserRouter>
-       
-      
-      
-    );
+       </BrowserRouter>);
   }
 }
 

@@ -3,6 +3,7 @@ const path =  require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const multer = require('multer');
 
 const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
@@ -30,6 +31,15 @@ dbConnection.once("open", () => console.log("Connected to DB!"));
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, 'uploads/');
+  }});
+
 app.use('/api/uploads', uploadRoute);
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
@@ -44,5 +54,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(config.PORT, () => {
-  console.log('Server started at http://localhost:'+config.PORT);
+  console.log('Server started at'+config.DOMAIN +':'+config.PORT);
 });

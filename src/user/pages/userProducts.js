@@ -41,7 +41,7 @@ const UserProducts =()=>{
 
     return(<div>
         <h2>All Products</h2>
-    <div><Link to="/user/add-product">Add Product</Link></div>
+        <div><Link to="/account/product-add">Add Product</Link></div>
     
     </div>);
 }

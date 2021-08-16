@@ -1,47 +1,44 @@
-import React ,{PureComponent} from  'react';
+import React ,{useState,useEffect} from  'react';
 import {connect} from 'react-redux';
 import {productsFetch} from '../actions/productActions';
 const withSearch=(ChildComponent)=>{
 
-  class WithSearch extends PureComponent {
-    constructor(props){
-      super(props);
-      this.state= {
-        searchTerm: '',
-        typing: false,
-        typingTimeout: 0
-      }
+  const WithSearch =()=>{
+
+    const [searchTerm,setSearchTerm]= useState("");
+    const [typing,setTyping]= useState(false);
+    const [typingTimeout,setTypingTimeout]= useState(0);
+
+    useEffect(()=>{},[]);
+
+    
+    const setSearchTyping=()=>{
+      setTyping(false);
       
     }
-    
-    searchTerm=()=>{
-        this.setState({typing:false});
-            
-    }
-    componentDidMount(){
 
-    }
   
-    handleSearch = event => {
+    const handleSearch = event => {
 
-      if(this.state.typingTimeout){
-        clearTimeout(this.state.typingTimeout);
+      if(typingTimeout){
+        clearTimeout(typingTimeout);
       }
-      this.setState({searchTerm:event.target.value,typing:true,typingTimeout:setTimeout(()=>
-         { this.searchTerm()},1000)});
+      setSearchTerm(event.target.value);
+      setTyping(true);
+      setTypingTimeout(setTimeout(()=>{
+        return setSearchTyping();
+      },1000));
     }
-    render(){
-
-          let {searchTerm,typing} = this.state;
         
-          return(<>
-              <input onChange={this.handleSearch} value={searchTerm} type="text" placeholder="Search" />
-              {(typing)?<div><h2>Searching</h2></div>:
+    return(<>
+      <input onChange={(event)=>handleSearch(event)} value={searchTerm} type="text" placeholder="Search" />
+        {(typing)?<div><h2>Searching</h2></div>:
               <ChildComponent searchTerm={searchTerm.toLowerCase()}/>}
-            </>);    
+      </>);    
     }
-  }
-  return WithSearch
+
+  return WithSearch;
+
 }
 
 export default withSearch;
