@@ -1,6 +1,8 @@
 import { PRODUCT_FETCHING,PRODUCT_FETCH_SUCCESS,PRODUCT_FETCH_FAILURE,
-    PRODUCT_SAVE_REQUEST,PRODUCT_SAVE_SUCCESS,PRODUCT_SAVE_FAIL} from './action-types/actionConstants';
-import {productListRequest,productSaveRequest} from '../helperFunctions/productHelpers';
+    PRODUCT_SAVE_REQUEST,PRODUCT_SAVE_SUCCESS,PRODUCT_SAVE_FAIL,
+    PRODUCT_DETAILS_REQUEST,PRODUCT_DETAILS_SUCCESS,PRODUCT_DETAILS_FAIL,} from './action-types/actionConstants';
+
+    import {productListRequest,productSaveRequest,productDetailRequest} from '../helperFunctions/productHelpers';
 
 
 const productsFetch = (searchQuery)=>{
@@ -32,5 +34,20 @@ const productSave =(formData)=>{
 
 }
 
+const productDetail=(prd_id)=>{
 
-export {productsFetch,productSave};
+    return async(dispatch) =>{
+        try{
+            dispatch({type:PRODUCT_DETAILS_REQUEST});
+            let data = await productDetailRequest(prd_id);
+            dispatch({type:PRODUCT_DETAILS_SUCCESS,payload:data});
+
+        }catch(e){
+            dispatch({type:PRODUCT_DETAILS_FAIL,payload:e.message})
+        }
+
+    }
+}
+
+
+export {productsFetch,productSave,productDetail};

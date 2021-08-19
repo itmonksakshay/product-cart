@@ -1,4 +1,4 @@
-import React ,{useMemo,useState,useEffect,useContext,useReducer} from 'react';
+import React ,{useMemo,useEffect,} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import ProductCard from '../snippets/productCard';
 import {productsFetch} from '../actions/productActions';
@@ -6,9 +6,7 @@ import AppContext from '../App'
 //import { productList } from '../helperFunctions/productHelpers';
 import axios from 'axios';
 
-
 const ProductList =({searchTerm})=>{
-
 
     const style={
         productCard:{
@@ -16,36 +14,53 @@ const ProductList =({searchTerm})=>{
             padding:"5px"
         }
     }
-    
 
     let productList = useSelector(state =>state.productList);
- 
+
     const dispatch = useDispatch();
     useEffect(() => {
-
-        if((!productList.isLoading && !productList.error && (!productList.data.length || searchTerm ))){
+        
+        if(!productList.isLoading && !productList.error && !productList.isFetched){
             dispatch(productsFetch(searchTerm));
         }
 
+        return () => {
+
+            productList.isFetched = false;
+        }
+
     },[searchTerm]);
+
+    let {isLoading,isFetched,data} = productList;
+
+
+
     let itemList = useMemo(()=> {
 
-        return productList.data.map((item,key)=>{
+        return data.map((item,key)=>{
             return(<div style={style.productCard} key={key} >
                     <ProductCard item={item} />
-                 
-                    {/*(cartItems.find(cartItem=>cartItem.id === item.id))?(<p style={{color:"red"}}>Added to the cart</p>):(null)*/} 
-                    </div>)
+                </div>);
         });
 
 
     },[searchTerm]);
-    
+
+
+    if(isLoading){
+        return(<div><h2>Loading</h2></div>);
+    }
+
+    if(isFetched && !data.length){
+        return(<div><h2>No Products Found</h2></div>)
+    }
+
+
     return(
         <div className="container">
             <h3 className="text-center">Our Products</h3>
             <div className="box">
-            {itemList}
+                {itemList}
             </div>
         </div>
     )

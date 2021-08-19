@@ -3,13 +3,13 @@ import axios from 'axios';
 const productListRequest = async(searchQuery)=>{
     try {
         let res = await axios.get(
-            'http://localhost:5005/api/products',
-            {headers: {'Access-Control-Allow-Origin' : '*',},
-            params:{search:searchQuery}
+            'http://localhost:5005/api/products/',
+            {headers: {'Access-Control-Allow-Origin' : '*'},params:{search:searchQuery}
         })
         return res.data;
     }
     catch(e){
+        console.log(e,">>>>>>>>>>>>>>>>>>>");
         throw new Error("server Issues");
     }
 }
@@ -27,4 +27,16 @@ const productSaveRequest = async(formData)=>{
     }
 }
 
-export {productListRequest,productSaveRequest};
+const productDetailRequest = async(prd_id)=>{
+    try{
+
+        let {data} = await axios.get('http://localhost:5005/api/products/'+prd_id);
+        return data;
+
+    }catch(e){
+        throw new Error("product not find");
+        
+    }
+}
+
+export {productListRequest,productSaveRequest,productDetailRequest};

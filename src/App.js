@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import './App.css';
 import Navbar from './components/navbar';
 import Home from './components/home';
+import SingleProduct from './components/singleProduct';
+import NotFound from './components/notFound';
 //import Cart from './components/cart';
 import UserAccount from './user';
 import Test from './test';
@@ -23,7 +25,9 @@ class App extends Component {
                 <Switch>  
                     <Route exact path="/" component={Home}/>
                     <Route path="/test" component={Test}/>
+                    <Route path="/product/:id" component={SingleProduct}/>
                     <UserAccount path="/account/"/>
+                    <Route component={NotFound} />
                   
                 </Switch>
               </div>

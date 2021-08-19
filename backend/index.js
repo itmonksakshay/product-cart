@@ -18,8 +18,8 @@ try {
   // Connect to the MongoDB cluster
   mongoose.connect(
     mongoDbUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log(" Mongoose is connected"),
+    { useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true },
+    () => console.log(" Mongoose is connected")
   );
 } catch (e) {
   console.log("could not connect");
@@ -54,5 +54,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(config.PORT, () => {
-  console.log('Server started at'+config.DOMAIN +':'+config.PORT);
+  console.log('Server started at '+config.DOMAIN +':'+config.PORT);
 });

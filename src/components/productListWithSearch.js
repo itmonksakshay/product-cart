@@ -1,43 +1,44 @@
 import React ,{useState,useEffect} from  'react';
-import {connect} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import {productsFetch} from '../actions/productActions';
+import { searchAction } from '../actions/searchActions';
+
 const withSearch=(ChildComponent)=>{
 
-  const WithSearch =()=>{
+  return ()=>{
 
-    const [searchTerm,setSearchTerm]= useState("");
-    const [typing,setTyping]= useState(false);
+    const dispatch = useDispatch();
+    const searchTerm = useSelector(state => state.searchTerm);
+    const [searchValue,setSearchValue] = useState(searchTerm.searchQuery);
     const [typingTimeout,setTypingTimeout]= useState(0);
 
-    useEffect(()=>{},[]);
+    useEffect(()=>{
+
+    },[]);
 
     
-    const setSearchTyping=()=>{
-      setTyping(false);
-      
-    }
-
-  
     const handleSearch = event => {
-
+      
       if(typingTimeout){
         clearTimeout(typingTimeout);
       }
-      setSearchTerm(event.target.value);
-      setTyping(true);
+      setSearchValue(event.target.value);
       setTypingTimeout(setTimeout(()=>{
-        return setSearchTyping();
-      },1000));
-    }
         
+        return dispatch(searchAction(event.target.value));
+      },1000));
+    }   
+    const {isTyping,searchQuery}= searchTerm;
+
     return(<>
-      <input onChange={(event)=>handleSearch(event)} value={searchTerm} type="text" placeholder="Search" />
-        {(typing)?<div><h2>Searching</h2></div>:
-              <ChildComponent searchTerm={searchTerm.toLowerCase()}/>}
+      <input onChange={(event)=>handleSearch(event)} value={searchValue} type="text" placeholder="Search" autoFocus />
+        {(isTyping)?<div><h2>Searching</h2></div>:<div>
+              <ChildComponent searchTerm={searchQuery.toLowerCase()}/>
+              </div>
+        }
       </>);    
     }
 
-  return WithSearch;
 
 }
 

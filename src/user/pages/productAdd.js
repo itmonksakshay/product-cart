@@ -31,6 +31,12 @@ const ProductAdd = ()=>{
                     <label>Product Price :-</label>
                     <input type="number" name="price" className="" id="" placeholder="" required/>
                 </div>
+                <div>
+                <select name="brand" id="">
+                    <option value="adidas">Adidas</option>
+                    <option value="haul">Haul</option>
+                </select>
+                </div>
                 <div className="">
                 <label>Product Image:</label>
                 <input  name="images" type="file" className="" id="" multiple required/>

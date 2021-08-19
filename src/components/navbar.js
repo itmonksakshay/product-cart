@@ -7,7 +7,7 @@ import {AppContext} from '../App';
             <nav>
                 <div>
                     <Link to="/">Shopping</Link>
-
+                    <Link to="/account">Account</Link>
                     <ul>
                         <li><Link to="/">Shop</Link></li>
                         <li><Link to="/cart">My cart</Link></li>
