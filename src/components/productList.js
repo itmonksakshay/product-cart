@@ -2,7 +2,6 @@ import React ,{useMemo,useEffect,} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import ProductCard from '../snippets/productCard';
 import {productsFetch} from '../actions/productActions';
-import AppContext from '../App'
 //import { productList } from '../helperFunctions/productHelpers';
 import axios from 'axios';
 

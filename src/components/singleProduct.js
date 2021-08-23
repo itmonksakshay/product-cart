@@ -1,11 +1,16 @@
-import React ,{useEffect} from 'react';
+import React ,{useEffect,useState} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { productDetail } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
+import {useHistory} from 'react-router-dom';
 
 const SingleProduct=(props)=>{
     let prdId = props.match.params.id;
+    const [qty,addQty] = useState(1);
     const prdDetail = useSelector(state=> state.productDetail);
     const dispatch = useDispatch();
+    const history = useHistory();
+
 
     useEffect(()=>{
         dispatch(productDetail(prdId));
@@ -13,6 +18,10 @@ const SingleProduct=(props)=>{
 
     let {product,loading,error} = prdDetail;
 
+
+    const addToCartHandler=()=>{
+      dispatch(addToCart(prdId,qty));  
+    }
     if(error){
         return(<div><h2>Product Not Found</h2></div>)
     }
@@ -71,7 +80,7 @@ const SingleProduct=(props)=>{
                         <span><button type="button"><i></i></button></span>
                     </div>
                 </div>
-                <button type="submit">Add to cart</button>
+                <button type="submit" onClick={(e)=>addToCartHandler()}>Add to cart</button>
               </div>
             </div>
         </div>);

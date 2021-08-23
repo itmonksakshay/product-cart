@@ -6,7 +6,8 @@ import Navbar from './components/navbar';
 import Home from './components/home';
 import SingleProduct from './components/singleProduct';
 import NotFound from './components/notFound';
-//import Cart from './components/cart';
+import Cart from './components/cart';
+import CheckoutPage from './components/checkoutPage';
 import UserAccount from './user';
 import Test from './test';
 
@@ -25,7 +26,9 @@ class App extends Component {
                 <Switch>  
                     <Route exact path="/" component={Home}/>
                     <Route path="/test" component={Test}/>
+                    <Route path="/cart" component={Cart}/>
                     <Route path="/product/:id" component={SingleProduct}/>
+                    <Route path="/checkout" component={CheckoutPage}/>
                     <UserAccount path="/account/"/>
                     <Route component={NotFound} />
                   
@@ -36,8 +39,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  products: state.productList
-})
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+  return {products: state.productList}
+
+}
 
 export default connect(mapStateToProps)(App);

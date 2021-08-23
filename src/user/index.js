@@ -1,5 +1,4 @@
 import React ,{useContext}from 'react';
-import axios from 'axios';
 import {Route,Redirect} from 'react-router-dom';
 import UserProducts from './pages/userProducts';
 import UserDashboard from './pages/userDashboard';
