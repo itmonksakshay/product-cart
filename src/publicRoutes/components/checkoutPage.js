@@ -1,6 +1,6 @@
 import React,{useEffect}from 'react';
-import DiscountCode from '../snippets/discountCoupon';
-import CartWidget,{CartItemsWidget} from '../snippets/cartWidget';
+import DiscountCode from '../../snippets/discountCoupon';
+import CartWidget,{CartItemsWidget} from '../../snippets/cartWidget';
 import {useSelector,useDispatch} from 'react-redux';
 import {useHistory } from "react-router-dom";
 

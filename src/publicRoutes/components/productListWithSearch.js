@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from  'react';
 import {useSelector,useDispatch} from 'react-redux';
-import { searchAction } from '../actions/searchActions';
+import { searchAction } from '../../actions/searchActions';
 
 const withSearch=(ChildComponent)=>{
 

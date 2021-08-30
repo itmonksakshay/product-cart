@@ -1,9 +1,7 @@
 import React ,{useMemo,useEffect,} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import ProductCard from '../snippets/productCard';
-import {productsFetch} from '../actions/productActions';
-//import { productList } from '../helperFunctions/productHelpers';
-import axios from 'axios';
+import ProductCard from '../../snippets/productCard';
+import {productsFetch} from '../../actions/productActions';
 
 const ProductList =({searchTerm})=>{
 

@@ -1,7 +1,7 @@
 import React ,{useEffect,useState} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { productDetail } from '../actions/productActions';
-import { addToCart } from '../actions/cartActions';
+import { productDetail } from '../../actions/productActions';
+import { addToCart } from '../../actions/cartActions';
 import {useHistory} from 'react-router-dom';
 
 const SingleProduct=(props)=>{

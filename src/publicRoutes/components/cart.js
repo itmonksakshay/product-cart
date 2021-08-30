@@ -1,7 +1,7 @@
 import React,{ useEffect }  from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import QtySelector from '../snippets/qtySelector';
-import {removeItem,addQuantity} from '../actions/cartActions';
+import QtySelector from '../../snippets/qtySelector';
+import {removeItem,addQuantity} from '../../actions/cartActions';
 import {Link} from 'react-router-dom';
 const Cart=(props)=>{
 
